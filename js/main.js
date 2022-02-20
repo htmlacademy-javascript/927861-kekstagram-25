@@ -11,4 +11,13 @@ const getRandomInteger = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1));
 };
 
+/**
+ * Checks if string's length is less than or equal to max length
+ * @param {string} str - string
+ * @param {integer} maxLength - max length of the string
+ * @returns true if string's length is less than or equal to max length
+ */
+const checkStringLength = (str, maxLength) => str.length <= maxLength;
+
 getRandomInteger(0, 2);
+checkStringLength('some test string', 140);
