@@ -19,5 +19,5 @@ const getRandomInteger = (min, max) => {
  */
 const checkStringLength = (str, maxLength) => str.length <= maxLength;
 
-console.log(getRandomInteger(-5, -3));
+getRandomInteger(0, 2);
 checkStringLength('some test string', 140);
