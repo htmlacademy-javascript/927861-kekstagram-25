@@ -8,7 +8,7 @@ const getRandomInteger = (min, max) => {
   if (min > max) {
     throw new Error('min must be less than or equal to max');
   }
-  return Math.floor(Math.random() * (max - min + 1));
+  return min + Math.floor(Math.random() * (max - min + 1));
 };
 
 /**
@@ -19,5 +19,5 @@ const getRandomInteger = (min, max) => {
  */
 const checkStringLength = (str, maxLength) => str.length <= maxLength;
 
-getRandomInteger(0, 2);
+console.log(getRandomInteger(-5, -3));
 checkStringLength('some test string', 140);
