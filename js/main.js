@@ -22,10 +22,12 @@ const checkStringLength = (str, maxLength) => str.length <= maxLength;
 checkStringLength('some test string', 140);
 
 const PHOTOS_COUNT = 25;
+
 const PhotoLikesCount = {
   MIN: 15,
   MAX: 200,
 };
+
 const PHOTO_DESCRIPTIONS = [
   'Description 1',
   'Description 2',
@@ -36,7 +38,9 @@ const PHOTO_DESCRIPTIONS = [
   'Description 7',
   'Description 8',
 ];
+
 const MAX_COMMENT_NUMBER = 10;
+
 const COMMENT_MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -45,6 +49,7 @@ const COMMENT_MESSAGES = [
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
+
 const COMMENTATOR_NAMES = [
   'Иван',
   'Хуан Себастьян',
@@ -55,6 +60,11 @@ const COMMENTATOR_NAMES = [
   'Люпита',
   'Вашингтон',
 ];
+
+const CommentAvatarNumber = {
+  MIN: 1,
+  MAX: 6,
+};
 
 /**
  * Return random element from given array
@@ -89,7 +99,7 @@ const commentIdGenerator = uniqueId();
  */
 const createComment = () => ({
   id: commentIdGenerator.next().value,
-  avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
+  avatar: `img/avatar-${getRandomInteger(CommentAvatarNumber.MIN, CommentAvatarNumber.MAX)}.svg`,
   message: getRandomArrayElement(COMMENT_MESSAGES),
   name: getRandomArrayElement(COMMENTATOR_NAMES),
 });
