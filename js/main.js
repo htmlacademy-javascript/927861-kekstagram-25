@@ -22,6 +22,16 @@ const checkStringLength = (str, maxLength) => str.length <= maxLength;
 checkStringLength('some test string', 140);
 
 const PHOTOS_COUNT = 25;
+const PHOTO_DESCRIPTIONS = [
+  'Description 1',
+  'Description 2',
+  'Description 3',
+  'Description 4',
+  'Description 5',
+  'Description 6',
+  'Description 7',
+  'Description 8',
+];
 
 const photoIds = Array.from({length: PHOTOS_COUNT}, (_, i) => i + 1);
 const urlIds = Array.from({length: PHOTOS_COUNT}, (_, i) => i + 1);
@@ -54,7 +64,7 @@ const createComment = () => ({
 const createPhoto = () => ({
   id: getRandomArrayElement(photoIds, true),
   url: `photos/${getRandomArrayElement(urlIds, true)}.jpg`,
-  description: 'В целом всё неплохо. Но не всё.',
+  description: getRandomArrayElement(PHOTO_DESCRIPTIONS),
   likes: getRandomInteger(15, 200),
   comments: [createComment(), createComment()],
 });
