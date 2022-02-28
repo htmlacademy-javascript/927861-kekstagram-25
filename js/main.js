@@ -19,10 +19,22 @@ const getRandomInteger = (min, max) => {
  */
 const checkStringLength = (str, maxLength) => str.length <= maxLength;
 
-getRandomInteger(0, 2);
 checkStringLength('some test string', 140);
 
 const PHOTOS_COUNT = 25;
+
+const photoIds = Array.from({length: PHOTOS_COUNT}, (_, i) => i + 1);
+const urlIds = Array.from({length: PHOTOS_COUNT}, (_, i) => i + 1);
+
+/**
+ * Return random element from given array
+ * @param {Array} elements - array of elements
+ * @param {Boolean} remove - true if element should be deleted from array. False by default
+ * @returns random element
+ */
+const getRandomArrayElement = (elements, remove = false) => remove ?
+  elements.splice(getRandomInteger(0, elements.length - 1), 1)[0] :
+  elements[getRandomInteger(0, elements.length - 1)];
 
 /**
  * Creates new comment object
@@ -40,18 +52,12 @@ const createComment = () => ({
  * @returns created photo object
  */
 const createPhoto = () => ({
-  id: 1,
-  url: 'photos/{{i}}.jpg',
+  id: getRandomArrayElement(photoIds, true),
+  url: `photos/${getRandomArrayElement(urlIds, true)}.jpg`,
   description: 'В целом всё неплохо. Но не всё.',
-  likes: 15,
+  likes: getRandomInteger(15, 200),
   comments: [createComment(), createComment()],
 });
 
-/**
- * Return random element from given array
- * @param {Array} elements - array of elements
- * @returns random element
- */
-const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
-
 const photos = Array.from({length: PHOTOS_COUNT}, createPhoto);
+console.log(photos);
