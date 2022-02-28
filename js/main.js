@@ -47,4 +47,11 @@ const createPhoto = () => ({
   comments: [createComment(), createComment()],
 });
 
+/**
+ * Return random element from given array
+ * @param {Array} elements - array of elements
+ * @returns random element
+ */
+const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
+
 const photos = Array.from({length: PHOTOS_COUNT}, createPhoto);
