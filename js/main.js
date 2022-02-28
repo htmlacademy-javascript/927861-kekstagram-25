@@ -13,7 +13,7 @@ const getRandomInteger = (min, max) => {
 
 /**
  * Checks if string's length is less than or equal to max length
- * @param {string} str - string
+ * @param {String} str - string
  * @param {Number} maxLength - max length of the string
  * @returns true if string's length is less than or equal to max length
  */
@@ -22,6 +22,10 @@ const checkStringLength = (str, maxLength) => str.length <= maxLength;
 checkStringLength('some test string', 140);
 
 const PHOTOS_COUNT = 25;
+const PhotoLikesCount = {
+  MIN: 15,
+  MAX: 200,
+};
 const PHOTO_DESCRIPTIONS = [
   'Description 1',
   'Description 2',
@@ -107,7 +111,7 @@ const createPhoto = () => ({
   id: photoIdGenerator.next().value,
   url: `photos/${urlIdGenerator.next().value}.jpg`,
   description: getRandomArrayElement(PHOTO_DESCRIPTIONS),
-  likes: getRandomInteger(15, 200),
+  likes: getRandomInteger(PhotoLikesCount.MIN, PhotoLikesCount.MAX),
   comments: generateComments(),
 });
 
