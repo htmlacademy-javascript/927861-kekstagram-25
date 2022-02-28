@@ -66,11 +66,25 @@ const getRandomArrayElement = (elements, remove = false) => remove ?
   elements[getRandomInteger(0, elements.length - 1)];
 
 /**
+ * Unique ID generator function.
+ * @returns generator
+ */
+function* uniqueId() {
+  let id = 0;
+
+  while (true) {
+    yield id++;
+  }
+}
+
+const commentIdGenerator = uniqueId();
+
+/**
  * Creates new comment object
  * @returns created comment object
  */
 const createComment = () => ({
-  id: 135,
+  id: commentIdGenerator.next().value,
   avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
   message: getRandomArrayElement(COMMENT_MESSAGES),
   name: getRandomArrayElement(COMMENTATOR_NAMES),
