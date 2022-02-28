@@ -52,9 +52,6 @@ const COMMENTATOR_NAMES = [
   'Вашингтон',
 ];
 
-const photoIds = Array.from({length: PHOTOS_COUNT}, (_, i) => i + 1);
-const urlIds = Array.from({length: PHOTOS_COUNT}, (_, i) => i + 1);
-
 /**
  * Return random element from given array
  * @param {Array} elements - array of elements
@@ -67,16 +64,19 @@ const getRandomArrayElement = (elements, remove = false) => remove ?
 
 /**
  * Unique ID generator function.
+ * @param {Number} start - start value.
  * @returns generator
  */
-function* uniqueId() {
-  let id = 0;
+function* uniqueId(start = 0) {
+  let id = start;
 
   while (true) {
     yield id++;
   }
 }
 
+const photoIdGenerator = uniqueId(1);
+const urlIdGenerator = uniqueId(1);
 const commentIdGenerator = uniqueId();
 
 /**
@@ -104,8 +104,8 @@ const generateComments = () => Array.from(
  * @returns created photo object
  */
 const createPhoto = () => ({
-  id: getRandomArrayElement(photoIds, true),
-  url: `photos/${getRandomArrayElement(urlIds, true)}.jpg`,
+  id: photoIdGenerator.next().value,
+  url: `photos/${urlIdGenerator.next().value}.jpg`,
   description: getRandomArrayElement(PHOTO_DESCRIPTIONS),
   likes: getRandomInteger(15, 200),
   comments: generateComments(),
