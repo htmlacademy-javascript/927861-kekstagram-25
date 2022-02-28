@@ -111,4 +111,10 @@ const createPhoto = () => ({
   comments: generateComments(),
 });
 
-const photos = Array.from({length: PHOTOS_COUNT}, createPhoto);
+/**
+ * Created array of photo objects with test data
+ * @returns Array of photo objects
+ */
+const createPhotos = () => Array.from({length: PHOTOS_COUNT}, createPhoto);
+
+createPhotos();
