@@ -21,3 +21,30 @@ const checkStringLength = (str, maxLength) => str.length <= maxLength;
 
 getRandomInteger(0, 2);
 checkStringLength('some test string', 140);
+
+const PHOTOS_COUNT = 25;
+
+/**
+ * Creates new comment object
+ * @returns created comment object
+ */
+const createComment = () => ({
+  id: 135,
+  avatar: 'img/avatar-6.svg',
+  message: 'В целом всё неплохо. Но не всё.',
+  name: 'Артём',
+});
+
+/**
+ * Creates new photo object
+ * @returns created photo object
+ */
+const createPhoto = () => ({
+  id: 1,
+  url: 'photos/{{i}}.jpg',
+  description: 'В целом всё неплохо. Но не всё.',
+  likes: 15,
+  comments: [createComment(), createComment()],
+});
+
+const photos = Array.from({length: PHOTOS_COUNT}, createPhoto);
