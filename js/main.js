@@ -1,4 +1,4 @@
-import {getRandomInteger} from './utils/index.js';
+import {getRandomInteger, uniqueId} from './utils/index.js';
 
 const PHOTOS_COUNT = 25;
 
@@ -54,19 +54,6 @@ const CommentAvatarNumber = {
 const getRandomArrayElement = (elements, remove = false) => remove ?
   elements.splice(getRandomInteger(0, elements.length - 1), 1)[0] :
   elements[getRandomInteger(0, elements.length - 1)];
-
-/**
- * Unique ID generator function.
- * @param {Number} start - start value.
- * @returns generator
- */
-function* uniqueId(start = 0) {
-  let id = start;
-
-  while (true) {
-    yield id++;
-  }
-}
 
 const photoIdGenerator = uniqueId(1);
 const urlIdGenerator = uniqueId(1);
