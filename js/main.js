@@ -1,25 +1,4 @@
-/**
- * Returns random integer number between min and max inclusive.
- * @param {Number} min - min value inclusive
- * @param {Number} max - max value inclusive
- * @returns random integer number
- */
-const getRandomInteger = (min, max) => {
-  if (min > max) {
-    throw new Error('min must be less than or equal to max');
-  }
-  return min + Math.floor(Math.random() * (max - min + 1));
-};
-
-/**
- * Checks if string's length is less than or equal to max length
- * @param {String} str - string
- * @param {Number} maxLength - max length of the string
- * @returns true if string's length is less than or equal to max length
- */
-const checkStringLength = (str, maxLength) => str.length <= maxLength;
-
-checkStringLength('some test string', 140);
+import {getRandomInteger} from './utils/index.js';
 
 const PHOTOS_COUNT = 25;
 
