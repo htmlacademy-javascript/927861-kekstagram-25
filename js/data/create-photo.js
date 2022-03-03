@@ -1,8 +1,8 @@
 import {uniqueId, getRandomArrayElement, getRandomInteger} from '../utils/index.js';
-import {PhotoLikesCount, PHOTO_DESCRIPTIONS} from '../const/index.js';
+import {PhotoLikesCount, PHOTO_DESCRIPTIONS, PHOTO_ID_START} from '../const/index.js';
 import {generateComments} from './index.js';
 
-const photoIdGenerator = uniqueId(1);
+const photoIdGenerator = uniqueId(PHOTO_ID_START);
 const urlIdGenerator = uniqueId(1);
 
 /**
