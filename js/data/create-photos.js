@@ -1,6 +1,5 @@
 import {createPhoto} from './index.js';
-
-const PHOTOS_COUNT = 25;
+import {PHOTOS_COUNT} from '../const/index.js';
 
 /**
  * Created array of photo objects with test data

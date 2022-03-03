@@ -1,7 +1,6 @@
 import {getRandomInteger} from '../utils/index.js';
+import {MAX_COMMENT_NUMBER} from '../const/index.js';
 import {createComment} from './index.js';
-
-const MAX_COMMENT_NUMBER = 10;
 
 /**
  * Generates random number of comments
