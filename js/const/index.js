@@ -6,3 +6,4 @@ export {default as CommentAvatarNumber} from './comment-avatar-number.js';
 export {default as PhotoLikesCount} from './photo-likes-count.js';
 export {default as PHOTO_DESCRIPTIONS} from './photo-descriptions.js';
 export {default as PHOTO_ID_START} from './photo-id-start.js';
+export {default as URL_ID_START} from './url-id-start.js';
