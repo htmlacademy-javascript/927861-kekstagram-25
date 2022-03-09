@@ -1,3 +1,5 @@
 import {createPhotos} from './data/index.js';
+import {drawPhotos} from './photos/index.js';
 
-createPhotos();
+const photos = createPhotos();
+drawPhotos(photos);
