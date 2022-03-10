@@ -1,8 +1,9 @@
 /**
  * Draws photos on main page
  * @param {Array} photos - array of photo objects
+ * @param {Function} onOpenFullSize - open fill size photo callback
  */
-const drawPhotos = (photos) => {
+const drawPhotos = (photos, onOpenFullSize) => {
 
   const pictureTemplate = document.querySelector('#picture')
     .content
@@ -10,12 +11,15 @@ const drawPhotos = (photos) => {
   const picturesContainer = document.querySelector('.pictures');
   const pictureFragment = document.createDocumentFragment();
 
-  photos.forEach(({url, likes, comments}) => {
+  photos.forEach((photo) => {
+    const {url, likes, comments} = photo;
     const pictureElement = pictureTemplate.cloneNode(true);
 
     pictureElement.querySelector('.picture__img').src = url;
     pictureElement.querySelector('.picture__likes').textContent = likes;
     pictureElement.querySelector('.picture__comments').textContent = comments.length;
+
+    pictureElement.addEventListener('click', () => onOpenFullSize(photo)); // TODO: Remove?
 
     pictureFragment.append(pictureElement);
   });
