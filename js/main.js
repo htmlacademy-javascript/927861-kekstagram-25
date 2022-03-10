@@ -1,5 +1,7 @@
 import {createPhotos} from './data/index.js';
-import {drawPhotos} from './photos/index.js';
+import {PhotoGalleryController} from './controllers/index.js';
 
 const photos = createPhotos();
-drawPhotos(photos);
+const photoGalleryController = new PhotoGalleryController(photos);
+
+photoGalleryController.render();
