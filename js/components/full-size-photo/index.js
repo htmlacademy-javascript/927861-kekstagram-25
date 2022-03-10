@@ -12,6 +12,8 @@ export default class FullSizePhoto {
 
     this._closeHandler = null;
     this._keydownHandler = this._keydownHandler.bind(this);
+
+    this._commentComponents = [];
   }
 
   /**
@@ -40,11 +42,11 @@ export default class FullSizePhoto {
    */
   _renderComments(comments) {
     this._commentListElement.innerHTML = '';
-    comments.forEach((comment) => {
-      const commentElement = new Comment(comment, this._commentListElement);
-      commentElement.render();
+    this._commentComponents = comments.map((comment) => {
+      const commentComponent = new Comment(comment, this._commentListElement);
+      commentComponent.render();
+      return commentComponent;
     });
-
   }
 
   /**
