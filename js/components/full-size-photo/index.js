@@ -9,11 +9,17 @@ export default class FullSizePhoto {
     this._descriptionElement = this._bigPictureElement.querySelector('.social__caption');
     this._closeButtonElement = this._bigPictureElement.querySelector('.big-picture__cancel');
     this._commentListElement = this._bigPictureElement.querySelector('.social__comments');
+    this._commentsCountElement = this._bigPictureElement.querySelector('.social__comment-count');
+    this._commentsLoaderElement = this._bigPictureElement.querySelector('.comments-loader');
 
     this._closeHandler = null;
     this._keydownHandler = this._keydownHandler.bind(this);
 
     this._commentComponents = [];
+
+    // temporary hide them
+    this._commentsCountElement.classList.add('hidden');
+    this._commentsLoaderElement.classList.add('hidden');
   }
 
   /**
