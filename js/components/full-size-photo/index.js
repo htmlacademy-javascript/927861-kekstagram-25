@@ -1,3 +1,5 @@
+import {KeyCodes} from '../../const/index.js';
+
 export default class FullSizePhoto {
   constructor() {
     this._bigPictureElement = document.querySelector('.big-picture');
@@ -23,7 +25,7 @@ export default class FullSizePhoto {
     this._descriptionElement.textContent = description;
 
     document.addEventListener('keydown', (evt) => {
-      if (evt.keyCode === 27) {
+      if (evt.keyCode === KeyCodes.ESC) {
         this._closeHandler();
       }
     });
