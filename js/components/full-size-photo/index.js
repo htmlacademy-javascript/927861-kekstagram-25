@@ -1,5 +1,3 @@
-import {KeyCodes} from '../../const/index.js';
-
 export default class FullSizePhoto {
   constructor() {
     this._bigPictureElement = document.querySelector('.big-picture');
@@ -10,6 +8,7 @@ export default class FullSizePhoto {
     this._closeButtonElement = this._bigPictureElement.querySelector('.big-picture__cancel');
 
     this._closeHandler = null;
+    this._keydownHandler = this._keydownHandler.bind(this);
   }
 
   /**
@@ -24,11 +23,7 @@ export default class FullSizePhoto {
     this._commentsCountElement.textContent = comments.length;
     this._descriptionElement.textContent = description;
 
-    document.addEventListener('keydown', (evt) => {
-      if (evt.keyCode === KeyCodes.ESC) {
-        this._closeHandler();
-      }
-    });
+    document.addEventListener('keydown', this._keydownHandler);
 
     this._bigPictureElement.classList.toggle('hidden');
     document.body.classList.toggle('modal-open');
@@ -40,7 +35,7 @@ export default class FullSizePhoto {
   hide() {
     this._bigPictureElement.classList.toggle('hidden');
     document.body.classList.toggle('modal-open');
-    document.removeEventListener('keydown', this._closeHandler);
+    document.removeEventListener('keydown', this._keydownHandler);
   }
 
   /**
@@ -59,4 +54,13 @@ export default class FullSizePhoto {
     this._closeButtonElement.removeEventListener('click', this._closeHandler);
   }
 
+  /**
+   * Handler for document key down event
+   * @param {KeyboardEvent} evt - event object
+   */
+  _keydownHandler(evt) {
+    if (evt.key === 'Esc' || evt.key === 'Escape') {
+      this._closeHandler();
+    }
+  }
 }
