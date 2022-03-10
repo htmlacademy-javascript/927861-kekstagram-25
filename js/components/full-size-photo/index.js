@@ -1,3 +1,5 @@
+import {Comment} from '../index.js';
+
 export default class FullSizePhoto {
   constructor() {
     this._bigPictureElement = document.querySelector('.big-picture');
@@ -6,6 +8,7 @@ export default class FullSizePhoto {
     this._commentsCountElement = this._bigPictureElement.querySelector('.comments-count');
     this._descriptionElement = this._bigPictureElement.querySelector('.social__caption');
     this._closeButtonElement = this._bigPictureElement.querySelector('.big-picture__cancel');
+    this._commentListElement = this._bigPictureElement.querySelector('.social__comments');
 
     this._closeHandler = null;
     this._keydownHandler = this._keydownHandler.bind(this);
@@ -23,10 +26,25 @@ export default class FullSizePhoto {
     this._commentsCountElement.textContent = comments.length;
     this._descriptionElement.textContent = description;
 
+    this._renderComments(photo.comments);
+
     document.addEventListener('keydown', this._keydownHandler);
 
     this._bigPictureElement.classList.toggle('hidden');
     document.body.classList.toggle('modal-open');
+  }
+
+  /**
+   * Renders photo's comments
+   * @param {Array} comments - array of comments
+   */
+  _renderComments(comments) {
+    this._commentListElement.innerHTML = '';
+    comments.forEach((comment) => {
+      const commentElement = new Comment(comment, this._commentListElement);
+      commentElement.render();
+    });
+
   }
 
   /**

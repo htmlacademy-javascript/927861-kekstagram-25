@@ -1,4 +1,5 @@
-import {PhotosGallery, FullSizePhoto} from '../../components/index.js';
+import {PhotosGallery} from '../../components/index.js';
+import {FullSizePhotoController} from '../../controllers/index.js';
 
 export default class PhotoGalleryController {
   /**
@@ -8,10 +9,11 @@ export default class PhotoGalleryController {
   constructor(photos) {
     this._photos = photos;
     this._photosGallery = new PhotosGallery();
-    this._fullSizePhoto = new FullSizePhoto();
+    this._fullSizePhotoController = new FullSizePhotoController();
 
-    this._fullSizePhoto.setCloseHandler(() => this._fullSizePhoto.hide());
-    this._photosGallery.setOpenFullSizeHandler((photo) => this._fullSizePhoto.render(photo));
+    this._photosGallery.setOpenFullSizeHandler(
+      (photo) => this._fullSizePhotoController.render(photo)
+    );
   }
 
   /**
