@@ -11,6 +11,7 @@ export default class UploadPhotoComponent {
 
     this._uploadFileHandler = null;
     this._closeHandler = null;
+    this._keydownHandler = this._keydownHandler.bind(this);
   }
 
   /**
