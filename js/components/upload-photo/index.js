@@ -1,4 +1,4 @@
-import {showPopup, hidePopup} from '../../utils/index.js';
+import {showPopup, hidePopup, isEscKey} from '../../utils/index.js';
 
 export default class UploadPhotoComponent {
   /**
@@ -67,8 +67,8 @@ export default class UploadPhotoComponent {
    * Handler for document key down event
    * @param {KeyboardEvent} evt - event object
    */
-  _keydownHandler(evt) { // TODO: make separate function
-    if (evt.key === 'Esc' || evt.key === 'Escape') {
+  _keydownHandler(evt) {
+    if (isEscKey(evt.key)) {
       this._closeHandler();
     }
   }

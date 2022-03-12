@@ -4,3 +4,4 @@ export {default as uniqueId} from './unique-id.js';
 export {default as getRandomArrayElement} from './get-random-array-element.js';
 export {default as showPopup} from './show-popup.js';
 export {default as hidePopup} from './hide-popup.js';
+export {default as isEscKey} from './is-esc-key.js';

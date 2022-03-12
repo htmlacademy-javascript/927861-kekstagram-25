@@ -1,5 +1,5 @@
 import {Comment} from '../index.js';
-import {showPopup, hidePopup} from '../../utils/index.js';
+import {showPopup, hidePopup, isEscKey} from '../../utils/index.js';
 
 export default class FullSizePhoto {
   constructor() {
@@ -84,7 +84,7 @@ export default class FullSizePhoto {
    * @param {KeyboardEvent} evt - event object
    */
   _keydownHandler(evt) {
-    if (evt.key === 'Esc' || evt.key === 'Escape') {
+    if (isEscKey(evt.key)) {
       this._closeHandler();
     }
   }
