@@ -1,3 +1,5 @@
+import {showPopup, hidePopup} from '../../utils/index.js';
+
 export default class UploadPhotoComponent {
   /**
    * Created an instance of component
@@ -19,21 +21,17 @@ export default class UploadPhotoComponent {
    */
   render() {
     document.addEventListener('keydown', this._keydownHandler);
-
-    this._uploadOverlay.classList.toggle('hidden'); // TODO: make separate function
-    document.body.classList.toggle('modal-open');
+    showPopup(this._uploadOverlay);
   }
 
   /**
    * Hides upload photo form
    */
   hide() {
-    this._uploadFileInput.value = ''; // TODO: check!
+    this._uploadFileInput.value = '';
 
     document.removeEventListener('keydown', this._keydownHandler);
-
-    this._uploadOverlay.classList.toggle('hidden'); // TODO: make separate function
-    document.body.classList.toggle('modal-open');
+    hidePopup(this._uploadOverlay);
   }
 
   /**
