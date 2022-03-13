@@ -7,3 +7,6 @@ export {default as PhotoLikesCount} from './photo-likes-count.js';
 export {default as PHOTO_DESCRIPTIONS} from './photo-descriptions.js';
 export {default as PHOTO_ID_START} from './photo-id-start.js';
 export {default as URL_ID_START} from './url-id-start.js';
+export {default as MAX_HASHTAGS_NUM} from './max-hashtags-num.js';
+export {default as hashTagRegExp} from './hashtag-reg-exp.js';
+export {default as HASHTAGS_SPLITTER} from './hashtags-splitter.js';
