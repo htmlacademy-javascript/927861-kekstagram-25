@@ -18,6 +18,9 @@ export default class UploadPhotoComponent {
     this._submitHandler = null;
 
     this._keydownHandler = this._keydownHandler.bind(this);
+
+    this._hashTagsInput.addEventListener('keydown', this._stopEventPropagation);
+    this._descriptionInput.addEventListener('keydown', this._stopEventPropagation);
   }
 
   /**
@@ -96,5 +99,13 @@ export default class UploadPhotoComponent {
     if (isEscKey(evt.key)) {
       this._closeHandler();
     }
+  }
+
+  /**
+   * Stops event propagation
+   * @param {Event} evt - event object
+   */
+  _stopEventPropagation(evt) {
+    evt.stopPropagation();
   }
 }
