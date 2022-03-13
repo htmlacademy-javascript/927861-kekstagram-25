@@ -1403,3 +1403,22 @@ main {
 .hidden {
   display: none;
 }
+
+.has-error {
+ position: relative;
+ display: block;
+}
+
+.has-error input,
+.has-error textarea {
+  border-color: #e90000;
+  outline: #e90000;
+}
+
+.input-error {
+  color: #e90000;
+  position: absolute;
+  left: 70px;
+  top: -20px;
+  text-transform: none;
+}

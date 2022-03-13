@@ -13,6 +13,8 @@ export default class UploadPhotoComponent {
 
     this._uploadFileHandler = null;
     this._closeHandler = null;
+    this._submitHandler = null;
+
     this._keydownHandler = this._keydownHandler.bind(this);
   }
 
@@ -56,11 +58,30 @@ export default class UploadPhotoComponent {
 
   /**
    * Sets close handler
-   * @param {Function} handler - upload file callback
+   * @param {Function} handler - popup close callback
    */
   setCloseHandler(handler) {
     this._closeHandler = handler;
     this._closeButton.addEventListener('click', this._closeHandler);
+  }
+
+  /**
+   * Sets submit handler
+   * @param {Function} handler - form submit callback
+   */
+  setSubmitHandler(handler) {
+    this._submitHandler = handler;
+    this._uploadForm.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+      this._submitHandler();
+    });
+  }
+
+  /**
+   * Returns upload form html element
+   */
+  getFormElement() {
+    return this._uploadForm;
   }
 
   /**
