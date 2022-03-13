@@ -1,4 +1,5 @@
 import {Comment} from '../index.js';
+import {showPopup, hidePopup, isEscKey} from '../../utils/index.js';
 
 export default class FullSizePhoto {
   constructor() {
@@ -38,8 +39,7 @@ export default class FullSizePhoto {
 
     document.addEventListener('keydown', this._keydownHandler);
 
-    this._bigPictureElement.classList.toggle('hidden');
-    document.body.classList.toggle('modal-open');
+    showPopup(this._bigPictureElement);
   }
 
   /**
@@ -59,8 +59,7 @@ export default class FullSizePhoto {
    * Hides popup
    */
   hide() {
-    this._bigPictureElement.classList.toggle('hidden');
-    document.body.classList.toggle('modal-open');
+    hidePopup(this._bigPictureElement);
     document.removeEventListener('keydown', this._keydownHandler);
   }
 
@@ -85,7 +84,7 @@ export default class FullSizePhoto {
    * @param {KeyboardEvent} evt - event object
    */
   _keydownHandler(evt) {
-    if (evt.key === 'Esc' || evt.key === 'Escape') {
+    if (isEscKey(evt.key)) {
       this._closeHandler();
     }
   }

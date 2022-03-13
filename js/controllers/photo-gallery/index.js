@@ -1,5 +1,5 @@
 import {PhotosGallery} from '../../components/index.js';
-import {FullSizePhotoController} from '../../controllers/index.js';
+import {FullSizePhotoController, UploadPhotoController} from '../../controllers/index.js';
 
 export default class PhotoGalleryController {
   /**
@@ -10,6 +10,7 @@ export default class PhotoGalleryController {
     this._photos = photos;
     this._photosGallery = new PhotosGallery();
     this._fullSizePhotoController = new FullSizePhotoController();
+    this._uploadPhotoController = new UploadPhotoController();
 
     this._photosGallery.setOpenFullSizeHandler(
       (photo) => this._fullSizePhotoController.render(photo)

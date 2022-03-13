@@ -30,7 +30,10 @@
       <section class="img-upload">
         <div class="img-upload__wrapper">
           <h2 class="img-upload__title  visually-hidden">Загрузка фотографии</h2>
-          <form class="img-upload__form" id="upload-select-image" method="post" enctype="multipart/form-data" autocomplete="off">
+          <form class="img-upload__form" id="upload-select-image"
+            action="https://25.javascript.pages.academy/kekstagram"
+            method="post" enctype="multipart/form-data" autocomplete="off"
+          >
 
             <!-- Изначальное состояние поля для загрузки изображения -->
             <fieldset class="img-upload__start">
@@ -115,8 +118,24 @@
 
                 <!-- Добавление хэш-тегов и комментария к изображению -->
                 <fieldset class="img-upload__text text">
-                  <input class="text__hashtags" name="hashtags" placeholder="#ХэшТег">
-                  <textarea class="text__description" name="description" placeholder="Ваш комментарий..."></textarea>
+                  <label class="input-label" id="hashtags" aria-label="Хэш-теги к изображению">
+                    <input class="text__hashtags" name="hashtags" placeholder="#ХэшТег"
+                      aria-labelledby="hashtags"
+                      data-pristine-hashtags-count
+                      data-pristine-hashtags-count-message="Не больше 5 тегов"
+                      data-pristine-hashtags-format
+                      data-pristine-hashtags-format-message="Неверный формат тега"
+                      data-pristine-hashtags-equal
+                      data-pristine-hashtags-equal-message="Теги должны быть разные"
+                    >
+                  </label>
+                  <label class="input-label" aria-label="Комментарии к изображению">
+                    <textarea class="text__description" id="description" name="description"
+                      maxlength="140"
+                      data-pristine-maxlength-message="Не больше 140 символов..."
+                      placeholder="Ваш комментарий..."
+                      aria-labelledby="description"></textarea>
+                  </label>
                 </fieldset>
 
                 <!-- Кнопка для отправки данных на сервер -->
@@ -230,6 +249,7 @@
     <div class="img-upload__message  img-upload__message--loading">Загружаем...</div>
   </template>
 
+  <script src="/pristine/pristine.min.js"></script>
   <script src="/js/main.js" type="module"></script>
 </body>
 </html>
