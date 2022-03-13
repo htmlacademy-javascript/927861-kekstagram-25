@@ -10,6 +10,8 @@ export default class UploadPhotoComponent {
     this._uploadOverlay = this._uploadForm.querySelector('.img-upload__overlay');
     this._closeButton = this._uploadForm.querySelector('.img-upload__cancel');
     this._previewImage = this._uploadForm.querySelector('.img-upload__preview img');
+    this._hashTagsInput = this._uploadForm.querySelector('.text__hashtags');
+    this._descriptionInput = this._uploadForm.querySelector('.text__description');
 
     this._uploadFileHandler = null;
     this._closeHandler = null;
@@ -31,6 +33,8 @@ export default class UploadPhotoComponent {
    */
   hide() {
     this._uploadFileInput.value = '';
+    this._descriptionInput.value = '';
+    this._hashTagsInput.value = '';
 
     document.removeEventListener('keydown', this._keydownHandler);
     hidePopup(this._uploadOverlay);
