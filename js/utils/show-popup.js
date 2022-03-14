@@ -1,9 +1,11 @@
+import showElement from './show-element.js';
+
 /**
  * Shows popup element
  * @param {HTMLElement} element - element
  */
 const showPopup = (element) => {
-  element.classList.remove('hidden');
+  showElement(element);
   document.body.classList.add('modal-open');
 };
 
