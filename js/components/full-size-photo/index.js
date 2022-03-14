@@ -1,5 +1,5 @@
 import {Comment} from '../index.js';
-import {showPopup, hidePopup, isEscKey} from '../../utils/index.js';
+import {showPopup, hidePopup, hideElement, showElement, isEscKey} from '../../utils/index.js';
 
 export default class FullSizePhoto {
   constructor() {
@@ -35,7 +35,7 @@ export default class FullSizePhoto {
 
     document.addEventListener('keydown', this._keydownHandler);
 
-    this._commentsLoaderElement.classList.remove('hidden');
+    showElement(this._commentsLoaderElement);
     showPopup(this._bigPictureElement);
   }
 
@@ -66,7 +66,7 @@ export default class FullSizePhoto {
    * Hides show more comments element
    */
   hideShowMoreComments() {
-    this._commentsLoaderElement.classList.add('hidden'); // TODO: move to const show - hide element
+    hideElement(this._commentsLoaderElement);
   }
 
   /**
