@@ -32,7 +32,7 @@ export default class FormValidator {
    * @param {String} value - hashtags
    */
   _hashTagsCountValidator(value) {
-    return value.split(' ').length <= MAX_HASHTAGS_NUM;
+    return value.split(HASHTAGS_SPLITTER).length <= MAX_HASHTAGS_NUM;
   }
 
   /**

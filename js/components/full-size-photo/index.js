@@ -17,10 +17,6 @@ export default class FullSizePhoto {
     this._keydownHandler = this._keydownHandler.bind(this);
 
     this._commentComponents = [];
-
-    // temporary hide them
-    this._commentsCountElement.classList.add('hidden');
-    this._commentsLoaderElement.classList.add('hidden');
   }
 
   /**
