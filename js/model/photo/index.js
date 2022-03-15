@@ -6,7 +6,7 @@ export default class Photo {
    * @param {Object} data - raw data object
    */
   constructor(data) {
-    this.id = data['id'];
+    this.id = String(data['id']);
     this.url = data['url'];
     this.description = data['description'];
     this.likes = data['likes'];
