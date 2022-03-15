@@ -22,4 +22,13 @@ export default class Photos {
   setPhotos(photos) {
     this._photos = [...photos];
   }
+
+  /**
+   * Finds photo by given Id
+   * @param {String} id - photo's id
+   * @returns {Photo} - photo object
+   */
+  getPhotoById(id) {
+    return this._photos.find((photo) => photo.id === id);
+  }
 }
