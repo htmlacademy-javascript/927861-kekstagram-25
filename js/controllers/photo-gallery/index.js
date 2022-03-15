@@ -7,7 +7,7 @@ export default class PhotoGalleryController {
    * @param {Array} photos - array of photos
    */
   constructor(photos) {
-    this._photos = photos;
+    this._photosModel = photos;
     this._photosGallery = new PhotosGallery();
     this._fullSizePhotoController = new FullSizePhotoController();
     this._uploadPhotoController = new UploadPhotoController();
@@ -21,6 +21,6 @@ export default class PhotoGalleryController {
    * Renders photos gallery
    */
   render() {
-    this._photosGallery.render(this._photos);
+    this._photosGallery.render(this._photosModel.getPhotos());
   }
 }
