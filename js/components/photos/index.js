@@ -4,7 +4,7 @@ export default class PhotosGallery {
       .content
       .querySelector('.picture');
     this._picturesContainer = document.querySelector('.pictures');
-    this._openFullSizeHandler = null;
+    this._photoClickedHandler = null;
   }
 
   /**
@@ -16,15 +16,13 @@ export default class PhotosGallery {
     const pictureFragment = document.createDocumentFragment();
 
     photos.forEach((photo) => {
-      const {url, likes, comments} = photo;
+      const {id, url, likes, comments} = photo;
       const pictureElement = this._pictureTemplate.cloneNode(true);
 
       pictureElement.querySelector('.picture__img').src = url;
       pictureElement.querySelector('.picture__likes').textContent = likes;
       pictureElement.querySelector('.picture__comments').textContent = comments.length;
-
-      pictureElement.addEventListener('click', () => this._openFullSizeHandler(photo)); // TODO: Remove?
-
+      pictureElement.dataset.photoId = id;
       pictureFragment.append(pictureElement);
     });
 
@@ -35,7 +33,12 @@ export default class PhotosGallery {
    * Sets open full size photo callback function
    * @param {Function} handler - open full size photo callback
    */
-  setOpenFullSizeHandler(handler) {
-    this._openFullSizeHandler = handler;
+  setPhotoClickedHandler(handler) {
+    this._photoClickedHandler = handler;
+    this._picturesContainer.addEventListener('click', ({target}) => {
+      if (target.classList.contains('picture__img')) {
+        this._photoClickedHandler(target.parentElement.dataset.photoId);
+      }
+    });
   }
 }

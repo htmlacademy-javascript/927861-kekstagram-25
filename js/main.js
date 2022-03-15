@@ -1,7 +1,12 @@
-import {createPhotos} from './data/index.js';
+import {Photos} from './model/index.js';
 import {PhotoGalleryController} from './controllers/index.js';
+import {Api} from './data/index.js';
 
-const photos = createPhotos();
-const photoGalleryController = new PhotoGalleryController(photos);
+const api = new Api();
+const photosModel = new Photos();
+const photoGalleryController = new PhotoGalleryController(photosModel);
 
-photoGalleryController.render();
+api.getPhotos().then((photos) => {
+  photosModel.setPhotos(photos);
+  photoGalleryController.render();
+});
