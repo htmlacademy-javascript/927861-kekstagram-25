@@ -1,6 +1,6 @@
 import {showPopup, hidePopup, isEscKey} from '../../utils/index.js';
 
-export default class UploadPhotoComponent {
+export default class UploadPhoto {
   /**
    * Created an instance of component
    */

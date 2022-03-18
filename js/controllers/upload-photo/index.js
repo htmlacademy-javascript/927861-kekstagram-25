@@ -1,4 +1,4 @@
-import {UploadPhotoComponent} from '../../components/index.js';
+import {UploadPhoto} from '../../components/index.js';
 import {FormValidator} from '../../utils/index.js';
 
 export default class UploadPhotoController {
@@ -6,7 +6,7 @@ export default class UploadPhotoController {
    * Creates new instance of controller
    */
   constructor() {
-    this._uploadPhotoComponent = new UploadPhotoComponent();
+    this._uploadPhotoComponent = new UploadPhoto();
 
     this._closeFormHandler = this._closeFormHandler.bind(this);
     this._uploadPhotoComponent.setCloseHandler(this._closeFormHandler);
