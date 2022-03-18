@@ -1,5 +1,5 @@
 import {PhotosGallery} from '../../components/index.js';
-import {FullSizePhotoController, UploadPhotoController} from '../../controllers/index.js';
+import {FullSizePhotoController, UploadPhotoController} from '../index.js';
 
 export default class PhotoGalleryController {
   /**
