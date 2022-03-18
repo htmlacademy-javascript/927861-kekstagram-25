@@ -14,6 +14,9 @@ export default class PhotoGalleryController {
 
     this._photoClickedHandler = this._photoClickedHandler.bind(this);
     this._photosGallery.setPhotoClickedHandler(this._photoClickedHandler);
+
+    this._uploadFileHandler = this._uploadFileHandler.bind(this);
+    this._photosGallery.setUploadFileHandler(this._uploadFileHandler);
   }
 
   /**
@@ -29,5 +32,18 @@ export default class PhotoGalleryController {
    */
   _photoClickedHandler(photoId) {
     this._fullSizePhotoController.render(this._photosModel.getPhotoById(photoId));
+  }
+
+  /**
+   * Handles file upload
+   * @param {File} file - loaded file object
+   */
+  _uploadFileHandler(file) {
+    const fileReader = new FileReader();
+
+    fileReader.addEventListener('load', () => {
+      this._uploadPhotoController.render(fileReader.result);
+    });
+    fileReader.readAsDataURL(file);
   }
 }
