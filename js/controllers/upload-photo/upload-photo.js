@@ -1,4 +1,4 @@
-import {UploadPhotoComponent} from '../../components/index.js';
+import {UploadPhoto} from '../../components/index.js';
 import {FormValidator} from '../../utils/index.js';
 
 export default class UploadPhotoController {
@@ -6,10 +6,7 @@ export default class UploadPhotoController {
    * Creates new instance of controller
    */
   constructor() {
-    this._uploadPhotoComponent = new UploadPhotoComponent();
-
-    this._uploadFileHandler = this._uploadFileHandler.bind(this);
-    this._uploadPhotoComponent.setUploadFileHandler(this._uploadFileHandler);
+    this._uploadPhotoComponent = new UploadPhoto();
 
     this._closeFormHandler = this._closeFormHandler.bind(this);
     this._uploadPhotoComponent.setCloseHandler(this._closeFormHandler);
@@ -21,17 +18,11 @@ export default class UploadPhotoController {
   }
 
   /**
-   * Handles file upload
-   * @param {File} file - loaded file object
+   * Renders upload photo popup
+   * @param {String} fileData - selected photo file data
    */
-  _uploadFileHandler(file) {
-    const fileReader = new FileReader();
-
-    fileReader.addEventListener('load', () => {
-      this._uploadPhotoComponent.setPreviewImage(fileReader.result);
-      this._uploadPhotoComponent.render();
-    });
-    fileReader.readAsDataURL(file);
+  render(fileData) {
+    this._uploadPhotoComponent.render(fileData);
   }
 
   /**

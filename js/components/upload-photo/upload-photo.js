@@ -1,6 +1,6 @@
 import {showPopup, hidePopup, isEscKey} from '../../utils/index.js';
 
-export default class UploadPhotoComponent {
+export default class UploadPhoto {
   /**
    * Created an instance of component
    */
@@ -13,7 +13,6 @@ export default class UploadPhotoComponent {
     this._hashTagsInput = this._uploadForm.querySelector('.text__hashtags');
     this._descriptionInput = this._uploadForm.querySelector('.text__description');
 
-    this._uploadFileHandler = null;
     this._closeHandler = null;
     this._submitHandler = null;
 
@@ -25,9 +24,11 @@ export default class UploadPhotoComponent {
 
   /**
    * Renders upload photo form
+   * @param {String} source - preview image source string
    */
-  render() {
+  render(source) {
     document.addEventListener('keydown', this._keydownHandler);
+    this._previewImage.src = source;
     showPopup(this._uploadOverlay);
   }
 
@@ -41,26 +42,6 @@ export default class UploadPhotoComponent {
 
     document.removeEventListener('keydown', this._keydownHandler);
     hidePopup(this._uploadOverlay);
-  }
-
-  /**
-   * Sets preview image source string
-   * @param {String} source - preview image source string
-   */
-  setPreviewImage(source) {
-    this._previewImage.src = source;
-  }
-
-  /**
-   * Sets upload file handler
-   * @param {Function} handler - upload file callback
-   */
-  setUploadFileHandler(handler) {
-    this._uploadFileHandler = handler;
-    this._uploadFileInput.addEventListener(
-      'change',
-      () => this._uploadFileHandler(this._uploadFileInput.files[0])
-    );
   }
 
   /**

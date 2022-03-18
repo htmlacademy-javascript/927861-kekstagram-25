@@ -1,10 +1,16 @@
 export default class PhotosGallery {
+  /**
+   * Creates new instance of component
+   */
   constructor() {
     this._pictureTemplate = document.querySelector('#picture')
       .content
       .querySelector('.picture');
     this._picturesContainer = document.querySelector('.pictures');
+    this._uploadFileInput = this._picturesContainer.querySelector('#upload-file');
+
     this._photoClickedHandler = null;
+    this._uploadFileHandler = null;
   }
 
   /**
@@ -41,4 +47,17 @@ export default class PhotosGallery {
       }
     });
   }
+
+  /**
+   * Sets upload file handler
+   * @param {Function} handler - upload file callback
+   */
+  setUploadFileHandler(handler) {
+    this._uploadFileHandler = handler;
+    this._uploadFileInput.addEventListener(
+      'change',
+      () => this._uploadFileHandler(this._uploadFileInput.files[0])
+    );
+  }
+
 }
