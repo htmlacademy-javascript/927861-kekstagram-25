@@ -1,3 +1,0 @@
-const MAX_COMMENT_NUMBER = 10;
-
-export default MAX_COMMENT_NUMBER;
