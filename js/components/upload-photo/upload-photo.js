@@ -1,3 +1,4 @@
+import {PhotoScaleChange} from '../../const/index.js';
 import {showPopup, hidePopup, isEscKey} from '../../utils/index.js';
 
 export default class UploadPhoto {
@@ -12,9 +13,12 @@ export default class UploadPhoto {
     this._previewImage = this._uploadForm.querySelector('.img-upload__preview img');
     this._hashTagsInput = this._uploadForm.querySelector('.text__hashtags');
     this._descriptionInput = this._uploadForm.querySelector('.text__description');
+    this._scaleControl = this._uploadForm.querySelector('.img-upload__scale');
+    this._scaleValue = this._scaleControl.querySelector('.scale__control--value');
 
     this._closeHandler = null;
     this._submitHandler = null;
+    this._photoScaleChangeHandler = null;
 
     this._keydownHandler = this._keydownHandler.bind(this);
 
@@ -63,6 +67,30 @@ export default class UploadPhoto {
       evt.preventDefault();
       this._submitHandler();
     });
+  }
+
+  /**
+   * Sets photo scale change handler
+   * @param {Function} handler - photo scale change handler
+   */
+  setPhotoScaleChangeHandler(handler) {
+    this._photoScaleChangeHandler = handler;
+    this._scaleControl.addEventListener('click', (evt) => {
+      if (evt.target.classList.contains('scale__control--smaller')) {
+        this._photoScaleChangeHandler(PhotoScaleChange.DOWN);
+      } else if (evt.target.classList.contains('scale__control--bigger')) {
+        this._photoScaleChangeHandler(PhotoScaleChange.UP);
+      }
+    });
+  }
+
+  /**
+   * Sets photo scale
+   * @param {Number} scale - photo scale
+   */
+  setPhotoScale(scale) {
+    this._scaleValue.value = `${scale}%`;
+    this._previewImage.style.transform = `scale(${scale / 100})`;
   }
 
   /**

@@ -1,5 +1,6 @@
 import {UploadPhoto} from '../../components/index.js';
 import {FormValidator} from '../../utils/index.js';
+import {PhotoScale} from '../../const/index.js';
 
 export default class UploadPhotoController {
   /**
@@ -15,6 +16,10 @@ export default class UploadPhotoController {
     this._uploadPhotoComponent.setSubmitHandler(this._submitHandler);
 
     this._validator = new FormValidator(this._uploadPhotoComponent.getFormElement());
+
+    this._photoScale = PhotoScale.DEFAULT;
+    this._photoScaleChangeHandler = this._photoScaleChangeHandler.bind(this);
+    this._uploadPhotoComponent.setPhotoScaleChangeHandler(this._photoScaleChangeHandler);
   }
 
   /**
@@ -22,6 +27,7 @@ export default class UploadPhotoController {
    * @param {String} fileData - selected photo file data
    */
   render(fileData) {
+    this._uploadPhotoComponent.setPhotoScale(this._photoScale);
     this._uploadPhotoComponent.render(fileData);
   }
 
@@ -39,5 +45,14 @@ export default class UploadPhotoController {
     if (this._validator.validate()) {
       this._uploadPhotoComponent.getFormElement().submit();
     }
+  }
+
+  /**
+   * Photo scale change handler
+   * @param {Function} changeScale - scale change function (up or down)
+   */
+  _photoScaleChangeHandler(changeScale) {
+    this._photoScale = changeScale(this._photoScale);
+    this._uploadPhotoComponent.setPhotoScale(this._photoScale);
   }
 }
