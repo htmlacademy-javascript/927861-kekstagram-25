@@ -1,6 +1,6 @@
 import {UploadPhoto} from '../../components/index.js';
 import {FormValidator} from '../../utils/index.js';
-import {PhotoScale} from '../../const/index.js';
+import {PhotoScale, PhotoScaleChange} from '../../const/index.js';
 
 export default class UploadPhotoController {
   /**
@@ -49,10 +49,24 @@ export default class UploadPhotoController {
 
   /**
    * Photo scale change handler
-   * @param {Function} changeScale - scale change function (up or down)
+   * @param {String} scaleChange - scale change (UP or DOWN)
    */
-  _photoScaleChangeHandler(changeScale) {
-    this._photoScale = changeScale(this._photoScale);
+  _photoScaleChangeHandler(scaleChange) {
+    switch(scaleChange) {
+      case PhotoScaleChange.UP:
+        this._photoScale = this._photoScale < PhotoScale.MAX ?
+          this._photoScale + PhotoScale.STEP :
+          this._photoScale;
+        break;
+      case PhotoScaleChange.DOWN:
+        this._photoScale = this._photoScale > PhotoScale.MIN ?
+          this._photoScale - PhotoScale.STEP :
+          this._photoScale;
+        break;
+      default:
+        throw new Error('Unsupported photo scale change operation');
+    }
+
     this._uploadPhotoComponent.setPhotoScale(this._photoScale);
   }
 }

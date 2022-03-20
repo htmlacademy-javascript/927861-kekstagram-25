@@ -13,8 +13,9 @@ export default class UploadPhoto {
     this._previewImage = this._uploadForm.querySelector('.img-upload__preview img');
     this._hashTagsInput = this._uploadForm.querySelector('.text__hashtags');
     this._descriptionInput = this._uploadForm.querySelector('.text__description');
-    this._scaleControl = this._uploadForm.querySelector('.img-upload__scale');
-    this._scaleValue = this._scaleControl.querySelector('.scale__control--value');
+    this._scaleUpButton = this._uploadForm.querySelector('.scale__control--bigger');
+    this._scaleDownButton = this._uploadForm.querySelector('.scale__control--smaller');
+    this._scaleValue = this._uploadForm.querySelector('.scale__control--value');
 
     this._closeHandler = null;
     this._submitHandler = null;
@@ -75,12 +76,11 @@ export default class UploadPhoto {
    */
   setPhotoScaleChangeHandler(handler) {
     this._photoScaleChangeHandler = handler;
-    this._scaleControl.addEventListener('click', (evt) => {
-      if (evt.target.classList.contains('scale__control--smaller')) {
-        this._photoScaleChangeHandler(PhotoScaleChange.DOWN);
-      } else if (evt.target.classList.contains('scale__control--bigger')) {
-        this._photoScaleChangeHandler(PhotoScaleChange.UP);
-      }
+    this._scaleUpButton.addEventListener('click', () => {
+      this._photoScaleChangeHandler(PhotoScaleChange.UP);
+    });
+    this._scaleDownButton.addEventListener('click', () => {
+      this._photoScaleChangeHandler(PhotoScaleChange.DOWN);
     });
   }
 
