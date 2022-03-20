@@ -20,6 +20,10 @@ export default class UploadPhotoController {
     this._photoScale = PhotoScale.DEFAULT;
     this._photoScaleChangeHandler = this._photoScaleChangeHandler.bind(this);
     this._uploadPhotoComponent.setPhotoScaleChangeHandler(this._photoScaleChangeHandler);
+
+    this._currentEffect = 'none'; // TODO: add to const
+    this._effectsChangeHandler = this._effectsChangeHandler.bind(this);
+    this._uploadPhotoComponent.setEffectChangeHandler(this._effectsChangeHandler);
   }
 
   /**
@@ -27,7 +31,12 @@ export default class UploadPhotoController {
    * @param {String} fileData - selected photo file data
    */
   render(fileData) {
+    this._photoScale = PhotoScale.DEFAULT;
     this._uploadPhotoComponent.setPhotoScale(this._photoScale);
+
+    this._uploadPhotoComponent.changeImageEffect('none', this._currentEffect);
+    this._currentEffect = 'none'; // TODO: add to const
+
     this._uploadPhotoComponent.render(fileData);
   }
 
@@ -68,5 +77,14 @@ export default class UploadPhotoController {
     }
 
     this._uploadPhotoComponent.setPhotoScale(this._photoScale);
+  }
+
+  /**
+   * Change photo effect handler
+   * @param {String} effect - new photo effect
+   */
+  _effectsChangeHandler(effect) {
+    this._uploadPhotoComponent.changeImageEffect(effect, this._currentEffect);
+    this._currentEffect = effect;
   }
 }

@@ -16,10 +16,13 @@ export default class UploadPhoto {
     this._scaleUpButton = this._uploadForm.querySelector('.scale__control--bigger');
     this._scaleDownButton = this._uploadForm.querySelector('.scale__control--smaller');
     this._scaleValue = this._uploadForm.querySelector('.scale__control--value');
+    this._effectsList = this._uploadForm.querySelector('.effects__list');
+    this._noEffectInput = this._effectsList.querySelector('#effect-none');
 
     this._closeHandler = null;
     this._submitHandler = null;
     this._photoScaleChangeHandler = null;
+    this._effectChangeHandler = null;
 
     this._keydownHandler = this._keydownHandler.bind(this);
 
@@ -44,6 +47,7 @@ export default class UploadPhoto {
     this._uploadFileInput.value = '';
     this._descriptionInput.value = '';
     this._hashTagsInput.value = '';
+    this._noEffectInput.checked = true;
 
     document.removeEventListener('keydown', this._keydownHandler);
     hidePopup(this._uploadOverlay);
@@ -85,6 +89,17 @@ export default class UploadPhoto {
   }
 
   /**
+   * Sets effect change handler
+   * @param {Function} handler - effects change handler
+   */
+  setEffectChangeHandler(handler) {
+    this._effectChangeHandler = handler;
+    this._effectsList.addEventListener('change', (evt) => {
+      this._effectChangeHandler(evt.target.value);
+    });
+  }
+
+  /**
    * Sets photo scale
    * @param {Number} scale - photo scale
    */
@@ -92,6 +107,17 @@ export default class UploadPhoto {
     this._scaleValue.value = `${scale}%`;
     this._previewImage.style.transform = `scale(${scale / 100})`;
   }
+
+  /**
+   * Changes photo image effect
+   * @param {String} newEffect - new effect
+   * @param {String} oldEffect - old effect
+   */
+  changeImageEffect(newEffect, oldEffect) {
+    this._previewImage.classList.remove(`effects__preview--${oldEffect}`);
+    this._previewImage.classList.add(`effects__preview--${newEffect}`);
+  }
+
 
   /**
    * Returns upload form html element
