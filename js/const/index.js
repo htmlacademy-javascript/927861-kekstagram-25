@@ -5,3 +5,5 @@ export {default as COMMENTS_ON_PAGE} from './comments_on_page.js';
 export {default as END_POINT} from './end-point.js';
 export {default as PhotoScale} from './photo-scale.js';
 export {default as PhotoScaleChange} from './photo-scale-change.js';
+export {default as PhotoEffect} from './photo-effect.js';
+export {default as PhotoEffectParams} from './photo-effect-params.js';

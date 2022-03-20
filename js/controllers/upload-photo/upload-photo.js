@@ -1,6 +1,6 @@
-import {UploadPhoto} from '../../components/index.js';
+import {UploadPhoto, Slider} from '../../components/index.js';
 import {FormValidator} from '../../utils/index.js';
-import {PhotoScale, PhotoScaleChange} from '../../const/index.js';
+import {PhotoScale, PhotoScaleChange, PhotoEffect, PhotoEffectParams} from '../../const/index.js';
 
 export default class UploadPhotoController {
   /**
@@ -21,9 +21,13 @@ export default class UploadPhotoController {
     this._photoScaleChangeHandler = this._photoScaleChangeHandler.bind(this);
     this._uploadPhotoComponent.setPhotoScaleChangeHandler(this._photoScaleChangeHandler);
 
-    this._currentEffect = 'none'; // TODO: add to const
+    this._currentEffect = PhotoEffect.NONE;
     this._effectsChangeHandler = this._effectsChangeHandler.bind(this);
     this._uploadPhotoComponent.setEffectChangeHandler(this._effectsChangeHandler);
+
+    this._effectSlider = new Slider(this._uploadPhotoComponent.getSliderElement());
+    this._effectSliderChangeHandler = this._effectSliderChangeHandler.bind(this);
+    this._effectSlider.setChangeHandler(this._effectSliderChangeHandler);
   }
 
   /**
@@ -34,8 +38,8 @@ export default class UploadPhotoController {
     this._photoScale = PhotoScale.DEFAULT;
     this._uploadPhotoComponent.setPhotoScale(this._photoScale);
 
-    this._uploadPhotoComponent.changeImageEffect('none', this._currentEffect);
-    this._currentEffect = 'none'; // TODO: add to const
+    this._uploadPhotoComponent.setImageEffect(PhotoEffect.NONE, this._currentEffect);
+    this._currentEffect = PhotoEffect.NONE;
 
     this._uploadPhotoComponent.render(fileData);
   }
@@ -84,7 +88,28 @@ export default class UploadPhotoController {
    * @param {String} effect - new photo effect
    */
   _effectsChangeHandler(effect) {
-    this._uploadPhotoComponent.changeImageEffect(effect, this._currentEffect);
+    this._uploadPhotoComponent.setImageEffect(effect, this._currentEffect);
     this._currentEffect = effect;
+    if (effect !== PhotoEffect.NONE) {
+      this._effectSlider.render(PhotoEffectParams[effect]);
+      this._uploadPhotoComponent.setImageFilter(
+        PhotoEffectParams[effect].start,
+        PhotoEffectParams[effect].filter(PhotoEffectParams[effect].start)
+      );
+    } else {
+      this._effectSlider.hide();
+      this._uploadPhotoComponent.setImageFilter();
+    }
+  }
+
+  /**
+   * Change slider handler
+   * @param {String} value - new slider value
+   */
+  _effectSliderChangeHandler(value) {
+    this._uploadPhotoComponent.setImageFilter(
+      value,
+      PhotoEffectParams[this._currentEffect].filter(value)
+    );
   }
 }

@@ -18,6 +18,8 @@ export default class UploadPhoto {
     this._scaleValue = this._uploadForm.querySelector('.scale__control--value');
     this._effectsList = this._uploadForm.querySelector('.effects__list');
     this._noEffectInput = this._effectsList.querySelector('#effect-none');
+    this._effectsSliderElement = this._uploadForm.querySelector('.effect-level__slider');
+    this._effectLevelInput = this._uploadForm.querySelector('.effect-level__value');
 
     this._closeHandler = null;
     this._submitHandler = null;
@@ -109,21 +111,39 @@ export default class UploadPhoto {
   }
 
   /**
-   * Changes photo image effect
+   * Sets photo image effect
    * @param {String} newEffect - new effect
    * @param {String} oldEffect - old effect
    */
-  changeImageEffect(newEffect, oldEffect) {
+  setImageEffect(newEffect, oldEffect) {
     this._previewImage.classList.remove(`effects__preview--${oldEffect}`);
     this._previewImage.classList.add(`effects__preview--${newEffect}`);
   }
 
+  /**
+   * Sets image filter
+   * @param {String} effectLevel - effect level value
+   * @param {String} filter - image filter
+   */
+  setImageFilter(effectLevel = '', filter = '') {
+    this._effectLevelInput.value = effectLevel;
+    this._previewImage.style.filter = filter;
+  }
 
   /**
    * Returns upload form html element
+   * @returns {HTMLFormElement} - upload photo form element
    */
   getFormElement() {
     return this._uploadForm;
+  }
+
+  /**
+   * Returns effects slider element
+   * @returns {HTMLElement} - effects slider element
+   */
+  getSliderElement() {
+    return this._effectsSliderElement;
   }
 
   /**
