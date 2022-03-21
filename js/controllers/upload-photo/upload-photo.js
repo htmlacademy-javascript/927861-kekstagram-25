@@ -93,11 +93,12 @@ export default class UploadPhotoController {
   _effectsChangeHandler(effect) {
     this._uploadPhotoComponent.setImageEffect(effect, this._currentEffect);
     this._currentEffect = effect;
+
     if (effect !== PhotoEffect.NONE) {
-      this._effectSlider.render(PhotoEffectParams[effect]);
+      const effectParams = PhotoEffectParams[effect];
+      this._effectSlider.render(effectParams);
       this._uploadPhotoComponent.setImageFilter(
-        PhotoEffectParams[effect].start,
-        PhotoEffectParams[effect].filter(PhotoEffectParams[effect].start)
+        effectParams.start, effectParams.filter(effectParams.start)
       );
     } else {
       this._effectSlider.hide();
@@ -111,8 +112,7 @@ export default class UploadPhotoController {
    */
   _effectSliderChangeHandler(value) {
     this._uploadPhotoComponent.setImageFilter(
-      value,
-      PhotoEffectParams[this._currentEffect].filter(value)
+      value, PhotoEffectParams[this._currentEffect].filter(value)
     );
   }
 }
