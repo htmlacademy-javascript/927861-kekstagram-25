@@ -28,6 +28,13 @@ export default class FormValidator {
   }
 
   /**
+   * Resets errors
+   */
+  reset() {
+    this._validator.reset();
+  }
+
+  /**
    * Validates number of hashtags
    * @param {String} value - hashtags
    */

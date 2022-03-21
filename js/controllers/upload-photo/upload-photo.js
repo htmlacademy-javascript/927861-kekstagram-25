@@ -52,6 +52,8 @@ export default class UploadPhotoController {
 
     this._effectSlider.hide();
     this._uploadPhotoComponent.setImageFilter();
+
+    this._validator.reset();
   }
 
   /**
