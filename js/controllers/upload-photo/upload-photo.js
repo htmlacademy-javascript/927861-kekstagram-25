@@ -35,12 +35,6 @@ export default class UploadPhotoController {
    * @param {String} fileData - selected photo file data
    */
   render(fileData) {
-    this._photoScale = PhotoScale.DEFAULT;
-    this._uploadPhotoComponent.setPhotoScale(this._photoScale);
-
-    this._uploadPhotoComponent.setImageEffect(PhotoEffect.NONE, this._currentEffect);
-    this._currentEffect = PhotoEffect.NONE;
-
     this._uploadPhotoComponent.render(fileData);
   }
 
@@ -49,6 +43,15 @@ export default class UploadPhotoController {
    */
   _closeFormHandler() {
     this._uploadPhotoComponent.hide();
+
+    this._photoScale = PhotoScale.DEFAULT;
+    this._uploadPhotoComponent.setPhotoScale(this._photoScale);
+
+    this._uploadPhotoComponent.setImageEffect(PhotoEffect.NONE, this._currentEffect);
+    this._currentEffect = PhotoEffect.NONE;
+
+    this._effectSlider.hide();
+    this._uploadPhotoComponent.setImageFilter();
   }
 
   /**
