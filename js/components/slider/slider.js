@@ -30,8 +30,10 @@ export default class Slider {
    * hides slider
    */
   hide() {
-    this._slider.destroy();
-    this._slider = null;
+    if (this._slider) {
+      this._slider.destroy();
+      this._slider = null;
+    }
   }
 
   /**
