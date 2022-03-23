@@ -4,7 +4,7 @@ import {Api} from './data/index.js';
 
 const api = new Api();
 const photosModel = new Photos();
-const photoGalleryController = new PhotoGalleryController(photosModel);
+const photoGalleryController = new PhotoGalleryController(photosModel, api);
 
 api.getPhotos().then((photos) => {
   photosModel.setPhotos(photos);

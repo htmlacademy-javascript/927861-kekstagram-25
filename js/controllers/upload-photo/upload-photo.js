@@ -5,8 +5,10 @@ import {PhotoScale, PhotoScaleChange, PhotoEffect, PhotoEffectParams} from '../.
 export default class UploadPhotoController {
   /**
    * Creates new instance of controller
+   * @param {Api} api - data api
    */
-  constructor() {
+  constructor(api) {
+    this._api = api;
     this._uploadPhotoComponent = new UploadPhoto();
 
     this._closeFormHandler = this._closeFormHandler.bind(this);
@@ -61,7 +63,11 @@ export default class UploadPhotoController {
    */
   _submitHandler() {
     if (this._validator.validate()) {
-      this._uploadPhotoComponent.getFormElement().submit();
+      // this._uploadPhotoComponent.getFormElement().submit();
+      this._api.uploadPhoto(new FormData(this._uploadPhotoComponent.getFormElement()))
+        .then(() => {
+          console.log('Photo uploaded');
+        });
     }
   }
 

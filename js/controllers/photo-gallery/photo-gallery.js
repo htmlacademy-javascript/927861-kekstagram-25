@@ -5,12 +5,13 @@ export default class PhotoGalleryController {
   /**
    * Creates an instance of Phtos gallery controller
    * @param {Array} photos - array of photos
+   * @param {Api} api - data api
    */
-  constructor(photos) {
+  constructor(photos, api) {
     this._photosModel = photos;
     this._photosGallery = new PhotosGallery();
     this._fullSizePhotoController = new FullSizePhotoController();
-    this._uploadPhotoController = new UploadPhotoController();
+    this._uploadPhotoController = new UploadPhotoController(api);
 
     this._photoClickedHandler = this._photoClickedHandler.bind(this);
     this._photosGallery.setPhotoClickedHandler(this._photoClickedHandler);
