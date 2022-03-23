@@ -20,6 +20,7 @@ export default class UploadPhoto {
     this._noEffectInput = this._effectsList.querySelector('#effect-none');
     this._effectsSliderElement = this._uploadForm.querySelector('.effect-level__slider');
     this._effectLevelInput = this._uploadForm.querySelector('.effect-level__value');
+    this._uploadButton = this._uploadForm.querySelector('.img-upload__submit');
 
     this._closeHandler = null;
     this._submitHandler = null;
@@ -50,6 +51,7 @@ export default class UploadPhoto {
     this._descriptionInput.value = '';
     this._hashTagsInput.value = '';
     this._noEffectInput.checked = true;
+    this._uploadButton.disabled = false;
 
     document.removeEventListener('keydown', this._keydownHandler);
     hidePopup(this._uploadOverlay);
@@ -144,6 +146,13 @@ export default class UploadPhoto {
    */
   getSliderElement() {
     return this._effectsSliderElement;
+  }
+
+  /**
+   * Disables upload button
+   */
+  disableUploadButton() {
+    this._uploadButton.disabled = true;
   }
 
   /**

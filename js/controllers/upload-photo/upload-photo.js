@@ -63,10 +63,15 @@ export default class UploadPhotoController {
    */
   _submitHandler() {
     if (this._validator.validate()) {
-      // this._uploadPhotoComponent.getFormElement().submit();
+      this._uploadPhotoComponent.disableUploadButton();
       this._api.uploadPhoto(new FormData(this._uploadPhotoComponent.getFormElement()))
         .then(() => {
-          console.log('Photo uploaded');
+          // TODO: make separate method for closing
+          this._closeFormHandler();
+          // TODO: show success message
+        })
+        .catch(() => {
+          // TODO: show error message
         });
     }
   }
