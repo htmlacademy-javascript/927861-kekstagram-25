@@ -1,4 +1,4 @@
-import {MAX_HASHTAGS_NUM, HASHTAGS_SPLITTER, hashTagRegExp} from '../const/index.js';
+import {MAX_HASHTAGS_NUM, HASHTAGS_SPLITTER, HASHTAG_REG_EXP} from '../const/index.js';
 
 export default class FormValidator {
   /**
@@ -50,7 +50,7 @@ export default class FormValidator {
     const hashTags = value.split(HASHTAGS_SPLITTER);
 
     return hashTags[0] ?
-      hashTags.every((hashTag) => hashTagRegExp.test(hashTag)) :
+      hashTags.every((hashTag) => HASHTAG_REG_EXP.test(hashTag)) :
       true;
   }
 
