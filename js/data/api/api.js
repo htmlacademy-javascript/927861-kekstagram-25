@@ -1,8 +1,6 @@
 import {Photo} from '../../model/index.js';
 import {END_POINT} from '../../const/index.js';
 
-const HTTP_RESPONSE_OK = 200;
-
 export default class Api {
   /**
    * Creates an instance of api
@@ -39,7 +37,7 @@ export default class Api {
    * @returns {Response} response if status is Ok
    */
   _checkStatus(response) {
-    if (response.status === HTTP_RESPONSE_OK) {
+    if (response.ok) {
       return response;
     }
     throw new Error(`${response.status}: ${response.statusText}`);
