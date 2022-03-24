@@ -46,6 +46,14 @@ export default class Popup {
   }
 
   /**
+   * Returns popup close handler
+   * @returns {Function} - close handler
+   */
+  getCloseHandler() {
+    return this._closeHandler;
+  }
+
+  /**
    * Handler for document key down event
    * @param {KeyboardEvent} evt - event object
    */
