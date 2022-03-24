@@ -1,4 +1,4 @@
-import {UploadPhoto, Slider} from '../../components/index.js';
+import {UploadPhoto, Slider, Message} from '../../components/index.js';
 import {FormValidator} from '../../utils/index.js';
 import {PhotoScale, PhotoScaleChange, PhotoEffect, PhotoEffectParams} from '../../const/index.js';
 
@@ -68,10 +68,14 @@ export default class UploadPhotoController {
         .then(() => {
           // TODO: make separate method for closing
           this._closeFormHandler();
-          // TODO: show success message
+          const message = new Message('success');
+          message.setCloseHandler(() => message.hide());
+          message.render();
         })
         .catch(() => {
-          // TODO: show error message
+          const message = new Message('error');
+          message.setCloseHandler(() => message.hide());
+          message.render();
         });
     }
   }
