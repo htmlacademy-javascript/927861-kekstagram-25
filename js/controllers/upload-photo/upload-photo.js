@@ -11,8 +11,8 @@ export default class UploadPhotoController {
     this._api = api;
     this._uploadPhotoComponent = new UploadPhoto();
 
-    this._closeFormHandler = this._closeFormHandler.bind(this);
-    this._uploadPhotoComponent.setCloseHandler(this._closeFormHandler);
+    this.closeUploadPhoto = this.closeUploadPhoto.bind(this);
+    this._uploadPhotoComponent.setCloseHandler(this.closeUploadPhoto);
 
     this._submitHandler = this._submitHandler.bind(this);
     this._uploadPhotoComponent.setSubmitHandler(this._submitHandler);
@@ -43,7 +43,7 @@ export default class UploadPhotoController {
   /**
    * Handles upload form close
    */
-  _closeFormHandler() {
+  closeUploadPhoto() {
     this._uploadPhotoComponent.hide();
 
     this._photoScale = PhotoScale.DEFAULT;
@@ -66,18 +66,24 @@ export default class UploadPhotoController {
       this._uploadPhotoComponent.disableUploadButton();
       this._api.uploadPhoto(new FormData(this._uploadPhotoComponent.getFormElement()))
         .then(() => {
-          // TODO: make separate method for closing
-          this._closeFormHandler();
-          const message = new Message('success');
-          message.setCloseHandler(() => message.hide());
-          message.render();
+          this.closeUploadPhoto();
+          this._showMessage('success');
         })
         .catch(() => {
-          const message = new Message('error');
-          message.setCloseHandler(() => message.hide());
-          message.render();
+          this.closeUploadPhoto();
+          this._showMessage('error');
         });
     }
+  }
+
+  /**
+   * Shows message popup
+   * @param {String} messageType - sucess | error
+   */
+  _showMessage(messageType) {
+    const message = new Message(messageType);
+    message.setCloseHandler(() => message.hide());
+    message.render();
   }
 
   /**
