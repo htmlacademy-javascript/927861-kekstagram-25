@@ -15,7 +15,7 @@ export default class Message extends Popup {
     this._messageElement = this._messageTemplate.cloneNode(true);
     this.setCloseButton(this._messageElement.querySelector(`.${template}__button`));
 
-    this._messageInner = this._messageElement.querySelector('.success__inner');
+    this._messageInner = this._messageElement.querySelector(`.${template}__inner`);
     this._messageInner.addEventListener('click', (evt) => evt.stopPropagation());
   }
 
