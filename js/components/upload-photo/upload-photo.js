@@ -1,15 +1,17 @@
 import {PhotoScaleChange} from '../../const/index.js';
-import {showPopup, hidePopup, isEscKey} from '../../utils/index.js';
+import {Popup} from '../index.js';
+import {showPopup, hidePopup} from '../../utils/index.js';
 
-export default class UploadPhoto {
+export default class UploadPhoto extends Popup {
   /**
    * Created an instance of component
    */
   constructor() {
+    super();
+
     this._uploadForm = document.querySelector('.img-upload__form');
     this._uploadFileInput = this._uploadForm.querySelector('#upload-file');
     this._uploadOverlay = this._uploadForm.querySelector('.img-upload__overlay');
-    this._closeButton = this._uploadForm.querySelector('.img-upload__cancel');
     this._previewImage = this._uploadForm.querySelector('.img-upload__preview img');
     this._hashTagsInput = this._uploadForm.querySelector('.text__hashtags');
     this._descriptionInput = this._uploadForm.querySelector('.text__description');
@@ -22,12 +24,11 @@ export default class UploadPhoto {
     this._effectLevelInput = this._uploadForm.querySelector('.effect-level__value');
     this._uploadButton = this._uploadForm.querySelector('.img-upload__submit');
 
-    this._closeHandler = null;
+    this.setCloseButton(this._uploadForm.querySelector('.img-upload__cancel'));
+
     this._submitHandler = null;
     this._photoScaleChangeHandler = null;
     this._effectChangeHandler = null;
-
-    this._keydownHandler = this._keydownHandler.bind(this);
 
     this._hashTagsInput.addEventListener('keydown', this._stopEventPropagation);
     this._descriptionInput.addEventListener('keydown', this._stopEventPropagation);
@@ -38,7 +39,8 @@ export default class UploadPhoto {
    * @param {String} source - preview image source string
    */
   render(source) {
-    document.addEventListener('keydown', this._keydownHandler);
+    super.render();
+
     this._previewImage.src = source;
     showPopup(this._uploadOverlay);
   }
@@ -47,23 +49,15 @@ export default class UploadPhoto {
    * Hides upload photo form
    */
   hide() {
+    super.hide();
+
     this._uploadFileInput.value = '';
     this._descriptionInput.value = '';
     this._hashTagsInput.value = '';
     this._noEffectInput.checked = true;
     this._uploadButton.disabled = false;
 
-    document.removeEventListener('keydown', this._keydownHandler);
     hidePopup(this._uploadOverlay);
-  }
-
-  /**
-   * Sets close handler
-   * @param {Function} handler - popup close callback
-   */
-  setCloseHandler(handler) {
-    this._closeHandler = handler;
-    this._closeButton.addEventListener('click', this._closeHandler);
   }
 
   /**
@@ -153,16 +147,6 @@ export default class UploadPhoto {
    */
   disableUploadButton() {
     this._uploadButton.disabled = true;
-  }
-
-  /**
-   * Handler for document key down event
-   * @param {KeyboardEvent} evt - event object
-   */
-  _keydownHandler(evt) {
-    if (isEscKey(evt.key)) {
-      this._closeHandler();
-    }
   }
 
   /**
