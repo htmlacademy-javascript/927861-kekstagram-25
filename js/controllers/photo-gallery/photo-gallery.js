@@ -9,6 +9,9 @@ export default class PhotoGalleryController {
    */
   constructor(photos, api) {
     this._photosModel = photos;
+    this._modelChangeHandler = this._modelChangeHandler.bind(this);
+    this._photosModel.addChangeHandler(this._modelChangeHandler);
+
     this._photosGallery = new PhotosGallery();
     this._fullSizePhotoController = new FullSizePhotoController();
     this._uploadPhotoController = new UploadPhotoController(api);
@@ -46,5 +49,13 @@ export default class PhotoGalleryController {
       this._uploadPhotoController.render(fileReader.result);
     });
     fileReader.readAsDataURL(file);
+  }
+
+  /**
+   * Handles photos model change
+   * @param {Arrat<Photo>} photos - array of photos
+   */
+  _modelChangeHandler(photos) {
+    this._photosGallery.render(photos);
   }
 }
