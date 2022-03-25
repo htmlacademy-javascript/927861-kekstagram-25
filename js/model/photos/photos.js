@@ -1,4 +1,4 @@
-import {PhotoFilter, PHOTO_FILTER_RANDOM_NUM} from '../../const/index.js';
+import {PhotoFilterType, PHOTO_FILTER_RANDOM_NUM} from '../../const/index.js';
 
 export default class Photos {
   /**
@@ -8,7 +8,7 @@ export default class Photos {
   constructor() {
     this._photos = [];
     this._changeHandlers = [];
-    this._filter = PhotoFilter.DEFAULT;
+    this._filter = PhotoFilterType.DEFAULT;
   }
 
   /**
@@ -66,14 +66,14 @@ export default class Photos {
    */
   _filterPhotos() {
     switch (this._filter) {
-      case PhotoFilter.RANDOM:
+      case PhotoFilterType.RANDOM:
         return [...this._photos]
           .sort(() => 0.5 - Math.random())
           .slice(0, PHOTO_FILTER_RANDOM_NUM);
-      case PhotoFilter.MOST_COMMENTED:
+      case PhotoFilterType.MOST_COMMENTED:
         return [...this._photos]
           .sort((photo1, photo2) => photo2.comments.length - photo1.comments.length);
-      case PhotoFilter.DEFAULT:
+      case PhotoFilterType.DEFAULT:
       default:
         return this._photos;
     }
