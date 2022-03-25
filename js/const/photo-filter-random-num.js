@@ -1,0 +1,3 @@
+const PHOTO_FILTER_RANDOM_NUM = 10;
+
+export default PHOTO_FILTER_RANDOM_NUM;

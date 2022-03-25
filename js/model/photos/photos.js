@@ -1,3 +1,5 @@
+import {PhotoFilter} from '../../const/index.js';
+
 export default class Photos {
   /**
    * Creates an instance of photos model
@@ -5,6 +7,7 @@ export default class Photos {
    */
   constructor() {
     this._photos = [];
+    this._filter = PhotoFilter.DEFAULT;
   }
 
   /**

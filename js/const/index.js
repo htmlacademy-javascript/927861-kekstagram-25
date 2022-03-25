@@ -7,3 +7,5 @@ export {default as PhotoScale} from './photo-scale.js';
 export {default as PhotoScaleChange} from './photo-scale-change.js';
 export {default as PhotoEffect} from './photo-effect.js';
 export {default as PhotoEffectParams} from './photo-effect-params.js';
+export {default as PhotoFilter} from './photo-filter.js';
+export {default as PHOTO_FILTER_RANDOM_NUM} from './photo-filter-random-num.js';
