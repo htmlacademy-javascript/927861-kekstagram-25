@@ -25,7 +25,6 @@ export default class Photos {
    */
   setPhotos(photos) {
     this._photos = [...photos];
-    // TODO: this._notifyChangeHandlers();
   }
 
   /**
