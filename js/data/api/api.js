@@ -1,8 +1,6 @@
 import {Photo} from '../../model/index.js';
 import {END_POINT} from '../../const/index.js';
 
-const HTTP_RESPONSE_OK = 200;
-
 export default class Api {
   /**
    * Creates an instance of api
@@ -13,20 +11,35 @@ export default class Api {
   }
 
   /**
+   * Loads photos from server
    * @returns {Promise<Array<Photo>>} - promise that resolves with array of photos
    */
   getPhotos() {
-    return this._send('data')
+    return this._send({url: 'data'})
       .then((response) => response.json())
       .then(Photo.parsePhotos);
+  }
+
+  /**
+   * Uploads photo to server
+   * @param {FormData} formData - form data object
+   */
+  uploadPhoto(formData) {
+    return this._send({
+      method: 'POST',
+      body: formData
+    }).then(this._checkStatus)
+      .catch((err) => {
+        throw err;
+      });
   }
 
   /**
    * Sends request to server
    * @return {Promise<Response>} - promise that resoves to server response if it is successfull
    */
-  _send(url) {
-    return fetch(`${this._endPoint}/${url}`)
+  _send({url='', method = 'GET', body = null, headers = new Headers()}) {
+    return fetch(`${this._endPoint}/${url}`, {method, body, headers})
       .then(this._checkStatus)
       .catch((err) => {
         throw err;
@@ -39,7 +52,7 @@ export default class Api {
    * @returns {Response} response if status is Ok
    */
   _checkStatus(response) {
-    if (response.status === HTTP_RESPONSE_OK) {
+    if (response.ok) {
       return response;
     }
     throw new Error(`${response.status}: ${response.statusText}`);

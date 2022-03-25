@@ -1,16 +1,18 @@
-import {UploadPhoto, Slider} from '../../components/index.js';
+import {UploadPhoto, Slider, Message} from '../../components/index.js';
 import {FormValidator} from '../../utils/index.js';
 import {PhotoScale, PhotoScaleChange, PhotoEffect, PhotoEffectParams} from '../../const/index.js';
 
 export default class UploadPhotoController {
   /**
    * Creates new instance of controller
+   * @param {Api} api - data api
    */
-  constructor() {
+  constructor(api) {
+    this._api = api;
     this._uploadPhotoComponent = new UploadPhoto();
 
-    this._closeFormHandler = this._closeFormHandler.bind(this);
-    this._uploadPhotoComponent.setCloseHandler(this._closeFormHandler);
+    this.closeUploadPhoto = this.closeUploadPhoto.bind(this);
+    this._uploadPhotoComponent.setCloseHandler(this.closeUploadPhoto);
 
     this._submitHandler = this._submitHandler.bind(this);
     this._uploadPhotoComponent.setSubmitHandler(this._submitHandler);
@@ -41,7 +43,7 @@ export default class UploadPhotoController {
   /**
    * Handles upload form close
    */
-  _closeFormHandler() {
+  closeUploadPhoto() {
     this._uploadPhotoComponent.hide();
 
     this._photoScale = PhotoScale.DEFAULT;
@@ -61,8 +63,27 @@ export default class UploadPhotoController {
    */
   _submitHandler() {
     if (this._validator.validate()) {
-      this._uploadPhotoComponent.getFormElement().submit();
+      this._uploadPhotoComponent.disableUploadButton();
+      this._api.uploadPhoto(new FormData(this._uploadPhotoComponent.getFormElement()))
+        .then(() => {
+          this.closeUploadPhoto();
+          this._showMessage('success');
+        })
+        .catch(() => {
+          this.closeUploadPhoto();
+          this._showMessage('error');
+        });
     }
+  }
+
+  /**
+   * Shows message popup
+   * @param {String} messageType - sucess | error
+   */
+  _showMessage(messageType) {
+    const message = new Message(messageType);
+    message.setCloseHandler(() => message.hide());
+    message.render();
   }
 
   /**

@@ -11,6 +11,8 @@ export default class PhotosGallery {
 
     this._photoClickedHandler = null;
     this._uploadFileHandler = null;
+
+    this._pictures = null;
   }
 
   /**
@@ -20,6 +22,7 @@ export default class PhotosGallery {
    */
   render(photos) {
     const pictureFragment = document.createDocumentFragment();
+    this._removePictures();
 
     photos.forEach((photo) => {
       const {id, url, likes, comments} = photo;
@@ -32,6 +35,7 @@ export default class PhotosGallery {
       pictureFragment.append(pictureElement);
     });
 
+    this._pictures = [...pictureFragment.children];
     this._picturesContainer.append(pictureFragment);
   }
 
@@ -60,4 +64,15 @@ export default class PhotosGallery {
     );
   }
 
+  /**
+   * Removes all picture elements
+   */
+  _removePictures() {
+    if (this._pictures) {
+      for (const picture of this._pictures) {
+        picture.remove();
+      }
+      this._pictures = null;
+    }
+  }
 }
