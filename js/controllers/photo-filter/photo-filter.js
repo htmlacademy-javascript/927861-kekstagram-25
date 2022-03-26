@@ -1,4 +1,5 @@
 import {PhotoFilter} from '../../components/index.js';
+import {debounce} from '../../utils/index.js';
 
 export default class PhotoFilterController {
   /**
@@ -10,7 +11,7 @@ export default class PhotoFilterController {
     this._photoFilterComponent = new PhotoFilter();
 
     this._filterChangeHandler = this._filterChangeHandler.bind(this);
-    this._photoFilterComponent.setFilterChangeHandler(this._filterChangeHandler);
+    this._photoFilterComponent.setFilterChangeHandler(debounce(this._filterChangeHandler));
   }
 
   /**
