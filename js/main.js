@@ -7,8 +7,9 @@ const photosModel = new Photos();
 const photoGalleryController = new PhotoGalleryController(photosModel, api);
 const photoFilterController = new PhotoFilterController(photosModel);
 
-api.getPhotos().then((photos) => {
+(async () => {
+  const photos = await api.getPhotos();
   photosModel.setPhotos(photos);
   photoFilterController.render();
   photoGalleryController.render();
-});
+})();
