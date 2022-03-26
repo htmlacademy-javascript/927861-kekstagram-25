@@ -14,36 +14,27 @@ export default class Api {
    * Loads photos from server
    * @returns {Promise<Array<Photo>>} - promise that resolves with array of photos
    */
-  getPhotos() {
-    return this._send({url: 'data'})
-      .then((response) => response.json())
-      .then(Photo.parsePhotos);
+  async getPhotos() {
+    const response = await this._send({url: 'data'});
+    const jsonData = await response.json();
+    return Photo.parsePhotos(jsonData);
   }
 
   /**
    * Uploads photo to server
    * @param {FormData} formData - form data object
    */
-  uploadPhoto(formData) {
-    return this._send({
-      method: 'POST',
-      body: formData
-    }).then(this._checkStatus)
-      .catch((err) => {
-        throw err;
-      });
+  async uploadPhoto(formData) {
+    await this._send({method: 'POST', body: formData});
   }
 
   /**
    * Sends request to server
    * @return {Promise<Response>} - promise that resoves to server response if it is successfull
    */
-  _send({url='', method = 'GET', body = null, headers = new Headers()}) {
-    return fetch(`${this._endPoint}/${url}`, {method, body, headers})
-      .then(this._checkStatus)
-      .catch((err) => {
-        throw err;
-      });
+  async _send({url='', method = 'GET', body = null, headers = new Headers()}) {
+    const response = await fetch(`${this._endPoint}/${url}`, {method, body, headers});
+    return this._checkStatus(response);
   }
 
   /**

@@ -9,3 +9,4 @@ export {default as PhotoEffect} from './photo-effect.js';
 export {default as PhotoEffectParams} from './photo-effect-params.js';
 export {default as PhotoFilterType} from './photo-filter-type.js';
 export {default as PHOTO_FILTER_RANDOM_NUM} from './photo-filter-random-num.js';
+export {default as DEBOUNCE_DELAY} from './debounce-delay.js';
